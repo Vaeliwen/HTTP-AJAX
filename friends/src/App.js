@@ -31,22 +31,11 @@ class App extends React.Component {
         });
   };
 
-  nameHandler(event) {
-    this.setState({name: event.target.value})
+  changeHandler(event) {
+    this.setState({[event.target.name]: event.target.value})
   }
 
-  ageHandler(event) {
-    this.setState({age: event.target.value})
-  }
-
-  emailHandler(event) {
-    this.setState({email: event.target.value})
-  }
-
-  idHandler(event) {
-    this.setState({id: event.target.value})
-  }
-
+ 
   submitHandler(event) {
     event.preventDefault()
     
@@ -68,12 +57,6 @@ class App extends React.Component {
  updateHandler(event) {
     event.preventDefault()
 
-    const updatedFriend = {
-      name: this.state.name,
-      age: this.state.age,
-      email: this.state.email,
-      id: this.state.id
-    }
  } 
 
   render() {
@@ -87,14 +70,14 @@ class App extends React.Component {
         <form onSubmit={this.submitHandler.bind(this)}>
           <h2>Add Your Friends!</h2>
           <label>
-            <input type='text' placeholder={`Friend's Name`} value={this.state.name} onChange={this.nameHandler.bind(this)} /> <br />
-            <input type='text' placeholder={`Friend's Age`}  value={this.state.age} onChange={this.ageHandler.bind(this)} /> <br />
-            <input type='text' placeholder={`Friend's E-Mail`} value={this.state.email} onChange={this.emailHandler.bind(this)} /> <br />
+            <input type='text' placeholder={`Friend's Name`} name='name' value={this.state.name} onChange={this.changeHandler.bind(this)} /> <br />
+            <input type='text' placeholder={`Friend's Age`} name='age' value={this.state.age} onChange={this.changeHandler.bind(this)} /> <br />
+            <input type='text' placeholder={`Friend's E-Mail`} name='email' value={this.state.email} onChange={this.changeHandler.bind(this)} /> <br />
           </label>
           <input type='submit' value='submit' />
         </form>
         <form onSubmit={this.updateHandler.bind(this)}>
-          <input type='text' placeholder='ID to update' value={this.state.id} onChange={this.idHandler.bind(this)} />
+          <input type='text' placeholder='ID to update' name='id' value={this.state.id} onChange={this.changeHandler.bind(this)} />
           <input type='submit' value='submit' />
         </form>
       </div>
