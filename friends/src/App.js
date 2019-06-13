@@ -1,34 +1,31 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
+import Friends from './Components/Friends';
 
 
 
 class App extends React.Component {
-  constructor(props) {
+
+  constructor(props){
     super(props)
     this.state = {
-      friends: [],
-      name: null,
-      age: null,
-      email: null,
-      id: null
-    } 
-  }
+        friends: [],
+        name: null,
+        age: null,
+        email: null
+    }
+}
 
-
-
-
-  componentDidMount() {
-    axios
-    .get(`http://localhost:5000/friends`)
-        .then(response => {
+componentDidMount() {
+  axios
+  .get(`http://localhost:5000/friends`)
+      .then(response => {
           this.setState({friends: response.data})
-        })
-        .catch(err => {
+      })
+      .catch(err => {
           console.error('Server error', err)
-        });
+      });
   };
 
   changeHandler(event) {
@@ -52,12 +49,8 @@ class App extends React.Component {
           friends: response.data
         })
       })
+      .catch(err => console.log(err))
   }
-
- updateHandler(event) {
-    event.preventDefault()
-
- } 
 
   render() {
     return (
@@ -74,10 +67,6 @@ class App extends React.Component {
             <input type='text' placeholder={`Friend's Age`} name='age' value={this.state.age} onChange={this.changeHandler.bind(this)} /> <br />
             <input type='text' placeholder={`Friend's E-Mail`} name='email' value={this.state.email} onChange={this.changeHandler.bind(this)} /> <br />
           </label>
-          <input type='submit' value='submit' />
-        </form>
-        <form onSubmit={this.updateHandler.bind(this)}>
-          <input type='text' placeholder='ID to update' name='id' value={this.state.id} onChange={this.changeHandler.bind(this)} />
           <input type='submit' value='submit' />
         </form>
       </div>
